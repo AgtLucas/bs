@@ -19,5 +19,5 @@ define(['backbone', 'views/slide'], function(Backbone, SlideView) {
         }
     });
 
-    return SlidesView;
+    return SlideView;
 });
