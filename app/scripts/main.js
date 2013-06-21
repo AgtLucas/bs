@@ -10,3 +10,10 @@ require.config({
         }
     }
 });
+
+// require(['models/slide', 'views/slide'], function(SlideModel, SlideView) {
+//     var slide = new SlideModel({ title: 'Testing!' });
+//     var slideView = new SlideView({ model: slide });
+//     slideView.render();
+//     console.log( slideView.el );
+// });
