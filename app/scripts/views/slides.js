@@ -1,4 +1,4 @@
-define(['backbone'], function(Backbone) {
+define(['backbone', 'views/slide'], function(Backbone, SlideView) {
     var SlidesView = Backbone.View.extend({
         el: $('slides'),
 
@@ -14,6 +14,8 @@ define(['backbone'], function(Backbone) {
         render: function(slide) {
             var slideView = new SlideView({ model: slide });
             this.$el.append(slideView.render().el);
+
+            return this;
         }
     });
 
