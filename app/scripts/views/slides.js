@@ -1,6 +1,6 @@
 define(['backbone', 'views/slide'], function(Backbone, SlideView) {
     var SlidesView = Backbone.View.extend({
-        el: $('slides'),
+        el: $('.slides'),
 
         initialize: function() {
             this.renderAll();
@@ -19,5 +19,5 @@ define(['backbone', 'views/slide'], function(Backbone, SlideView) {
         }
     });
 
-    return SlideView;
+    return SlidesView;
 });
