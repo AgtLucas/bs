@@ -4,12 +4,12 @@ define(['backbone', 'views/slides', 'collections/slides'], function(Backbone, Sl
 
         initialize: function() {
             var testCollection = [
-                { title: 'My Slide'},
-                { title: 'My 2nd Slide'}
+                { title: 'My Slide' },
+                { title: 'My 2nd Slide' }
             ];
 
             new SlidesView({
-                collection: new SlidesCollection([testCollection])
+                collection: new SlidesCollection(testCollection)
             });
         }
     });
