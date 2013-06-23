@@ -10,7 +10,10 @@ define(['backbone'], function(Backbone) {
     },
 
     showSlide: function(slideIndex) {
-      console.log( slideIndex );
+      App.Vent.trigger('changeSlide', {
+        slideIndex: slideIndex,
+        direction: 'next'
+      });
     }
   });
 
