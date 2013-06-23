@@ -17,7 +17,7 @@ define(['backbone',
                 collection: new SlidesCollection(testCollection)
             });
 
-            new MainRouter();
+            App.router = new MainRouter();
             Backbone.history.start();
         }
     });
