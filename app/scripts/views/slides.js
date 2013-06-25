@@ -4,6 +4,8 @@ define(['backbone', 'views/slide'], function(Backbone, SlideView) {
 
         initialize: function() {
             this.currentSlideIndex = 1;
+            this.transitionSpeed = 4000;
+
             this.renderAll();
 
             App.Vent.on('init', this.hideAllButFirst, this);
@@ -16,6 +18,9 @@ define(['backbone', 'views/slide'], function(Backbone, SlideView) {
 
         changeSlide: function(opts) {
             var newSlide;
+            var slides = this.$el.children();
+
+            this.hideAllButFirst();
 
             if ( opts.slideIndex ) {
                 this.currentSlideIndex = ~~opts.slideIndex;
@@ -23,8 +28,18 @@ define(['backbone', 'views/slide'], function(Backbone, SlideView) {
                 this.nextSlide(opts.direction);
             }
 
-            newSlide = this.$el.children().eq(this.currentSlideIndex - 1);
-            console.log(newSlide);
+            newSlide = slides.eq(this.currentSlideIndex - 1);
+
+            slides.filter(':visible')
+                // TEMP
+                .css('position', 'absolute')
+                .animate({
+                    top: opts.direction === 'next' ? '100%' : '-100%',
+                    opacity: 'hide'
+                }, this.transitionSpeed, function() {
+                    $(this).css('top', 0);
+                });
+
         },
 
         nextSlide: function(direction) {
