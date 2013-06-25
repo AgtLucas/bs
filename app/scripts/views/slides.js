@@ -4,7 +4,8 @@ define(['backbone', 'views/slide'], function(Backbone, SlideView) {
 
         initialize: function() {
             this.currentSlideIndex = 1;
-            this.transitionSpeed = 4000;
+            this.numSlides = this.collection.length;
+            this.transitionSpeed = 400;
 
             this.renderAll();
 
@@ -17,15 +18,14 @@ define(['backbone', 'views/slide'], function(Backbone, SlideView) {
         },
 
         changeSlide: function(opts) {
-            var newSlide;
+            var self = this;
             var slides = this.$el.children();
-
-            this.hideAllButFirst();
+            var newSlide;
 
             if ( opts.slideIndex ) {
                 this.currentSlideIndex = ~~opts.slideIndex;
             } else {
-                this.nextSlide(opts.direction);
+                this.setCurrentSlideIndex(opts.direction);
             }
 
             newSlide = slides.eq(this.currentSlideIndex - 1);
@@ -34,16 +34,33 @@ define(['backbone', 'views/slide'], function(Backbone, SlideView) {
                 // TEMP
                 .css('position', 'absolute')
                 .animate({
-                    top: opts.direction === 'next' ? '100%' : '-100%',
+                    top: opts.direction === 'next' ? '-100%' : '100%',
                     opacity: 'hide'
                 }, this.transitionSpeed, function() {
                     $(this).css('top', 0);
+
+                    newSlide
+                        .css('position', 'absolute')
+                        .css('top', opts.direction === 'next' ? '100%' : '-100%')
+                        .animate({
+                            top: 0,
+                            opacity: 'show'
+                        }, self.transitionSpeed);
                 });
+
+                App.router.navigate('/slides/' + this.currentSlideIndex );
 
         },
 
-        nextSlide: function(direction) {
+        setCurrentSlideIndex: function(direction) {
+            this.currentSlideIndex += direction === 'next' ? 1 : -1;
+            if ( this.currentSlideIndex > this.numSlides ) {
+                this.currentSlideIndex = 1;
+            }
 
+            if ( this.currentSlideIndex <= 0 ) {
+                this.currentSlideIndex = this.numSlides;
+            }
         },
 
         renderAll: function() {
