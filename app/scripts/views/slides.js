@@ -3,13 +3,32 @@ define(['backbone', 'views/slide'], function(Backbone, SlideView) {
         el: $('.slides'),
 
         initialize: function() {
+            this.currentSlideIndex = 1;
             this.renderAll();
 
             App.Vent.on('init', this.hideAllButFirst, this);
+            App.Vent.on('changeSlide', this.changeSlide, this);
         },
 
         hideAllButFirst: function() {
             this.$el.children(':nth-child(n+2)').hide();
+        },
+
+        changeSlide: function(opts) {
+            var newSlide;
+
+            if ( opts.slideIndex ) {
+                this.currentSlideIndex = ~~opts.slideIndex;
+            } else {
+                this.nextSlide(opts.direction);
+            }
+
+            newSlide = this.$el.children().eq(this.currentSlideIndex - 1);
+            console.log(newSlide);
+        },
+
+        nextSlide: function(direction) {
+
         },
 
         renderAll: function() {
