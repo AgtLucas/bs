@@ -5,7 +5,7 @@ define(['backbone', 'views/slide'], function(Backbone, SlideView) {
         initialize: function() {
             this.renderAll();
 
-            App.vent.on('init', this.hideAllButFirst, this);
+            App.Vent.on('init', this.hideAllButFirst, this);
         },
 
         hideAllButFirst: function() {
