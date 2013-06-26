@@ -10,7 +10,7 @@ define(['backbone',
         initialize: function() {
             var testCollection = [
                 { title: 'My Slide' },
-                { title: 'My 2nd Slide' }
+                { title: 'My Second Slide' }
             ];
 
             new SlidesView({
