@@ -5,7 +5,7 @@ define(['backbone', 'views/slide'], function(Backbone, SlideView) {
         initialize: function() {
             this.currentSlideIndex = 1;
             this.numSlides = this.collection.length;
-            this.transitionSpeed = 400;
+            this.transitionSpeed = 500;
 
             this.renderAll();
 
