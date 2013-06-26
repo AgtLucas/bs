@@ -53,7 +53,7 @@ define(['backbone', 'views/slide'], function(Backbone, SlideView) {
         },
 
         setCurrentSlideIndex: function(direction) {
-            this.currentSlideIndex += direction === 'next' ? 1 : -1;
+            this.currentSlideIndex += direction === 'next' ? -1 : 1;
             if ( this.currentSlideIndex > this.numSlides ) {
                 this.currentSlideIndex = 1;
             }
